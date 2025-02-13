@@ -62,3 +62,13 @@ main{
 
 }
 
+
+.quiz-over-text{
+    display: none;
+    grid-area: section-1;
+}
+
+.quiz-score{
+    display: none;
+    grid-area: section-2;
+}
