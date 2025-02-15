@@ -12,11 +12,27 @@
 <body>
 
   <!-- Quiz menu start -->
+  <header>
+    <div class="current-heading">
+      
+    </div>
+    <div class="toggle-container">
+      <img src="./assets/images/icon-sun-dark.svg" alt="icon-light" width="20" height="20">
+      <div class="toggle-button">
+        <div class="circle" ></div>
+      </div>
+      <img src="./assets/images/icon-moon-dark.svg" alt="icon-light" width="20" height="20">
+    </div>
+    </div>
+  </header>
 
   <main>
     <section class="section-1">
-      Welcome to the Frontend Quiz!
-      Pick a subject to get started.
+      <div class="welcome-text">
+        <span>Welcome to the</span>
+         <span>Frontend Quiz!</span>
+      </div>
+      <p>Pick a subject to get started.</p>
     </section>
     <section class="section-2">
       
@@ -24,28 +40,30 @@
    
   
       <section class="question-section">
-        <div class="question-count">
-          Question
-          number
-           <span id="current-question"></span> of 10
+        <div class="question-container">
+          <div class="question-count">
+            Question
+             <span id="current-question"></span> of 10
+          </div>
+          <div id="question"></div>
         </div>
-        <div id="question"></div>
+        <div class="question-progress-bar"></div>
       </section>
      <section class="answer-section">
        <div class="options">
          
        </div>
        <button id="submit-answer-button"></button>
-     
+       <div class="warning">Please Select an answer</div>
       </section>
       
         <section class="quiz-over-text">
           Quiz completed
-  
+          You scored
         </section>
         <section class="quiz-score">
-          You scored... 
-
+         
+          <div class="topic"></div>
          <span id="final-score"></span> score out of 10
         <button class="play-again-button">play again</button>
         </section>

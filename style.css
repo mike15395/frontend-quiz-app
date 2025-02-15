@@ -1,14 +1,127 @@
+@font-face {
+    font-family: 'Rubik';
+    src: url(./assets/fonts/static/Rubik-Regular.ttf)format('truetype');
+    font-style: normal;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(./assets/fonts/static/Rubik-Medium.ttf)format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(./assets/fonts/static/Rubik-Italic.ttf)format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(./assets/fonts/Rubik-Italic-VariableFont_wght.ttf)format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url(./assets/fonts/Rubik-VariableFont_wght.ttf)format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
+:root{
+    --purple:#A729F5;
+    --light-purple:#f0d8ff;
+    --dark-grey:#313E51;
+    --grey-navy:#626C7F;
+    --light-grey:#F4F6FA;
+    --navy:#3B4D66;
+    --light-bluish:#ABC1E1;
+    --green:#26D782;
+    --red:#EE5454;
+    --pure-white:#FFFFFF;
+}
+
 body{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    font-family: 'Rubik';
+    font-weight: normal;
+    font-weight: 100;
+    background-image: url(./assets/images/pattern-background-desktop-light.svg);
+    background-repeat: no-repeat;
+    background-color: var(--light-grey);
+    padding: 30px 60px 80px 60px;
+}
+header{
+    width: 100vw;
+    height: 20vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+header .current-heading{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.toggle-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.toggle-button{
+    width: 50px;
+    height: 30px;
+    position: relative;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: var(--purple);
+}
+
+.toggle-active{
+    background-color: var(--purple);
+}
+
+.circle{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 25px;
+    margin: 5px;
+    background-color: white;
+   
+}
+
+.active-circle{
+    left:100%;
+    transform:translateX(-150%);
+  
 }
 
 main{
@@ -23,43 +136,163 @@ main{
 
 .section-1{
     grid-area: section-1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.section-1 .welcome-text{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.section-1 .welcome-text span:nth-child(1){
+    font-family: "Rubik";
+    font-weight: 100;
+    font-style: normal;
+    font-size: 64px;
+}
+
+.section-1 .welcome-text span:nth-child(2){
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 64px;
+}
+
+.section-1 p{
+    font-family: "Rubik";
+    font-weight: 100;
+    font-style: italic;
+    font-size: 16px;
 }
 
 .section-2{
     grid-area: section-2;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
+
 
 .section-2 div{
     padding: 5%;
-    border: 1px solid black;
+    background-color: var(--pure-white);
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    border-radius: 20px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
 }
 
+.section-2 div img{
+    width: 30px;
+    height: 30px;
+}
 
 .question-section{
     display: none;
     grid-area: section-1;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.question-section .question-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.question-section .question-container .question-count{
+    font-family: "Rubik";
+    font-weight: 100;
+    font-style: italic;
+    color: var(--grey-navy);
+    font-size: 18px;
+}
+
+.question-section .question-container #question{
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    color: var(--dark-grey);
+    font-size: 42px;
+}
+
+
+.question-section .question-progress-bar{
+    width: 100%;
+    height: 8px;
+    border: 2px;
+    border-radius: 5px;
+    background-color: var(--pure-white);
+}
 .answer-section{
     display: none;
     grid-area: section-2;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .answer-section .options{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    cursor: pointer;
 }
 .answer-section .options .option{
-    padding: 2%;
-    border: 1px solid black;
+    padding: 3%;
     display: flex;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
+    background-color: var(--pure-white);
+    border-radius: 20px;
+}
 
+.answer-section .options .option span:nth-child(1){
+
+    background-color: var(--light-grey);
+    color: var(--navy);
+    padding: 2%;
+    border-radius: 5px;
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.answer-section .options .option:hover span:nth-child(1){
+    background-color: var(--light-purple);
+    color: var(--purple);
+}
+
+.answer-section .options .option .selected span:nth-child(1){
+    background-color: var(--purple);
+    color: var(--pure-white);
+}
+
+.answer-section .options .option span:nth-child(2){
+
+    color: var(--navy);
+    padding: 2%;
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.answer-section .options .option #check-image{
+    display: none;
+    text-align: right;
+}
+.answer-section .warning{
+    display: none;
 }
 
 
@@ -71,4 +304,19 @@ main{
 .quiz-score{
     display: none;
     grid-area: section-2;
+}
+
+button{
+    width: 100%;
+    background-color: var(--purple);
+    color: white;
+    font-family: "Rubik";
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    padding: 3%;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
 }
