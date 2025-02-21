@@ -26,7 +26,7 @@
     </div>
   </header>
 
-  <main>
+  <main >
     <section class="section-1">
       <div class="welcome-text">
         <span>Welcome to the</span>
@@ -54,18 +54,21 @@
          
        </div>
        <button id="submit-answer-button"></button>
-       <div class="warning">Please Select an answer</div>
+       <div class="warning"><img src="./assets/images/icon-error.svg" alt="error-icon" width="20" height="20"> <span>Please select an answer</span></div>
       </section>
       
         <section class="quiz-over-text">
-          Quiz completed
-          You scored
+          <div>Quiz completed</div>
+          <div>You scored...</div>
         </section>
         <section class="quiz-score">
          
-          <div class="topic"></div>
-         <span id="final-score"></span> score out of 10
-        <button class="play-again-button">play again</button>
+          <div class="score-container">
+            <div class="topic"></div>
+            <span id="final-score"></span> 
+            <span> out of 10</span>
+          </div>
+        <button class="play-again-button">Play Again</button>
         </section>
 
   </main>

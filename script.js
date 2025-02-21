@@ -2,7 +2,8 @@ let quizData = [];
 let score = 0;
 let currentHeading = document.querySelector(".current-heading");
 let darkLightModeButton = document.querySelector(".toggle-button");
-let optionImagePath;
+let correctTickIcon = `<img src="./assets/images/icon-correct.svg" width=30 height=30 id="check-image"/>`;
+let incorrectIcon = `<img src="./assets/images/icon-incorrect.svg" width=30 height=30 id="check-image"/>`;
 let rootStyles = getComputedStyle(document.documentElement);
 
 fetchQuizData();
@@ -14,6 +15,10 @@ function toggleClick() {
 
   circle.classList.toggle("active-circle");
   toggleButton.classList.toggle("toggle-active");
+
+  document.body.classList.toggle("body-active");
+  let welcomeText = document.querySelector(".welcome-text");
+  welcomeText.classList.toggle("welcome-text-active");
 }
 
 function fetchQuizData() {
@@ -70,6 +75,7 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
   let lightGrey = rootStyles.getPropertyValue("--light-grey").trim();
   let navy = rootStyles.getPropertyValue("--navy").trim();
 
+  //question progress bar increases on moving on to next question
   questionProgressBar.style.backgroundImage = `-webkit-linear-gradient(left, ${purpleColor}, ${purpleColor} ${
     10 * (questionIndex + 1)
   }%, transparent ${10 * (questionIndex + 1)}%, transparent 100%)`;
@@ -86,13 +92,19 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
 
   //display current options
   let optionsContainer = document.querySelector(".options");
+
   //refresh container for next questions
   optionsContainer.innerHTML = "";
+
   questions[questionIndex].options.map((op, index) => {
     let escapedOp = escapeHTML(op);
-    optionsContainer.innerHTML += `<div id=${index} class="option" value=${JSON.stringify(
-      op
-    )}><span>${optionPrefix[index]}</span><span>${escapedOp}</span> </div>`;
+    optionsContainer.innerHTML += `
+    <div id=${index} class="option" value=${JSON.stringify(op)}>
+    
+    <span>${optionPrefix[index]}</span>
+    <span>${escapedOp}</span>
+    
+     </div>`;
   });
 
   let options = document.querySelectorAll(".option");
@@ -126,7 +138,9 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
     //check if some option is selected before submitting
     document.querySelector(".warning").style.display = "none";
     if (!selectedOption) {
-      document.querySelector(".warning").style.display = "block";
+      document.querySelector(".warning").style.display = "flex";
+      document.querySelector(".warning").style.justifyContent = "center";
+      document.querySelector(".warning").style.gap = "10px";
       return;
     }
 
@@ -134,7 +148,7 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
 
     //toggle button text content
     if (this.textContent === "Submit Answer") {
-      this.textContent = "next question";
+      this.textContent = "Next Question";
 
       if (selectedOption.getAttribute("value") === correctAnswer) {
         //correct case-highlight option with green
@@ -146,9 +160,7 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
           "span:first-child"
         ).style.color = `${pureWhite}`;
 
-        optionImagePath = "./assets/images/icon-correct.svg";
-        selectedOption.innerHTML += `<img src=${optionImagePath} width=30 height=30 id="check-image"/>`;
-        document.getElementById("check-image").style.display = "flex";
+        selectedOption.innerHTML += correctTickIcon;
 
         score = score + 1;
       } else if (selectedOption.getAttribute("value") !== correctAnswer) {
@@ -160,32 +172,30 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
         selectedOption.querySelector(
           "span:first-child"
         ).style.color = `${pureWhite}`;
-        optionImagePath = "./assets/images/icon-incorrect.svg";
-        selectedOption.innerHTML += `<img src=${optionImagePath} width=30 height=30 id="check-image"/>`;
-        document.getElementById("check-image").style.display = "flex";
-      }
 
-      //check  selected option with actual answer
-      options.forEach((op) => {
-        if (op.getAttribute("value") === correctAnswer) {
-          //highlight correct option in case of incorrect selection
-          op.style.border = `2px solid ${green}`;
-          op.querySelector(
-            "span:first-child"
-          ).style.backgroundColor = `${green}`;
-          op.querySelector("span:first-child").style.color = `${pureWhite}`;
-          optionImagePath = "./assets/images/icon-correct.svg";
-          op.innerHTML += `<img src=${optionImagePath} width=30 height=30 id="check-image"/>`;
-          document.getElementById("check-image").style.display = "flex";
-        }
-      });
-    } else if ((this.textContent = "next question")) {
+        selectedOption.innerHTML += incorrectIcon;
+
+        //check  selected option with actual answer
+        options.forEach((op) => {
+          if (op.getAttribute("value") === correctAnswer) {
+            //highlight correct option in case of incorrect selection
+            op.style.border = `2px solid ${green}`;
+            op.querySelector(
+              "span:first-child"
+            ).style.backgroundColor = `${green}`;
+            op.querySelector("span:first-child").style.color = `${pureWhite}`;
+            op.innerHTML += correctTickIcon;
+          }
+        });
+      }
+    } else if ((this.textContent = "Next Question")) {
       //display next question
       if (questionIndex === questions.length - 1) {
         displayQuizEnd(score, selectedTopic);
         return;
       }
 
+      //go to next question by incrementing array index
       questionIndex = questionIndex + 1;
       let nextQuestions;
       quizData["quizzes"].map((q) => {
@@ -202,10 +212,13 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
 function displayQuizEnd(score, selectedTopic) {
   document.querySelector(".question-section").style.display = "none";
   document.querySelector(".answer-section").style.display = "none";
-  document.querySelector(".quiz-over-text").style.display = "block";
-  document.querySelector(".quiz-score").style.display = "block";
+  document.querySelector(".quiz-over-text").style.display = "flex";
+  document.querySelector(".quiz-over-text").style.flexDirection = "column";
+  document.querySelector(".quiz-score").style.display = "flex";
+  document.querySelector(".quiz-score").style.flexDirection = "column";
+  document.querySelector(".quiz-score").style.gap = "20px";
   document.querySelector(".topic").innerHTML =
-    `<img src=${selectedTopic.icon} width="20" height="20"/>` +
+    `<img src=${selectedTopic.icon} width="30" height="30"/>` +
     selectedTopic.title;
   document.getElementById("final-score").innerHTML = score;
   document
