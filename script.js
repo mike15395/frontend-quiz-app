@@ -16,9 +16,67 @@ function toggleClick() {
   circle.classList.toggle("active-circle");
   toggleButton.classList.toggle("toggle-active");
 
+  let sunImgSrc = document.getElementById("sun-icon");
+  let moonImgSrc = document.getElementById("moon-icon");
+
+  //toggle sun and moon icons
+  sunImgSrc.getAttribute("src") === "./assets/images/icon-sun-dark.svg"
+    ? sunImgSrc.setAttribute("src", "./assets/images/icon-sun-light.svg")
+    : sunImgSrc.setAttribute("src", "./assets/images/icon-sun-dark.svg");
+
+  moonImgSrc.getAttribute("src") === "./assets/images/icon-moon-dark.svg"
+    ? moonImgSrc.setAttribute("src", "./assets/images/icon-moon-light.svg")
+    : moonImgSrc.setAttribute("src", "./assets/images/icon-moon-dark.svg");
+
+  //toggle header
+  document.querySelector(".current-heading").classList.toggle("header-active");
+
+  //toggle whole body
   document.body.classList.toggle("body-active");
+
+  //toggle initial welcome text
   let welcomeText = document.querySelector(".welcome-text");
   welcomeText.classList.toggle("welcome-text-active");
+
+  //toggle quiz question and answer section
+  document
+    .querySelector(".section-1-paragraph")
+    .classList.toggle("section-1-p-active");
+
+  document
+    .querySelectorAll(".quiz-topics")
+    .forEach((ele) => ele.classList.toggle("quiz-topics-active"));
+
+  document.getElementById("question").classList.toggle("question-active");
+  document
+    .querySelector(".question-count")
+    .classList.toggle("question-count-active");
+
+  document
+    .querySelector(".question-progress-bar")
+    .classList.toggle("question-progress-bar-active");
+
+  let options = document.querySelectorAll(".option");
+  if (options) {
+    options.forEach((ele) => {
+      ele.classList.toggle("option-active");
+      ele
+        .querySelector("span:nth-child(2)")
+        .classList.toggle("option-active-2");
+    });
+  }
+
+  // toggle quiz over section
+  document
+    .querySelector(".quiz-over-text")
+    .classList.toggle("quiz-over-text-active");
+  document
+    .querySelector(".score-container")
+    .classList.toggle("score-container-active");
+
+  document.querySelector(".topic").classList.toggle("topic-active");
+  document.getElementById("final-score").classList.toggle("final-score-active");
+  document.querySelector(".out-of").classList.toggle("out-of-active");
 }
 
 function fetchQuizData() {
@@ -109,6 +167,26 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
 
   let options = document.querySelectorAll(".option");
 
+  // options.forEach((ele) => {
+  //   if (!ele.classList.contains("option-active")) {
+  //     ele.classList.add("option-active");
+  //   } else {
+  //     ele.classList.remove("option-active");
+  //   }
+
+  //   if (
+  //     !ele
+  //       .querySelector("span:nth-child(2)")
+  //       .classList.contains("option-active-2")
+  //   ) {
+  //     ele.querySelector("span:nth-child(2)").classList.add("option-active-2");
+  //   } else {
+  //     ele
+  //       .querySelector("span:nth-child(2)")
+  //       .classList.remove("option-active-2");
+  //   }
+  // });
+
   let selectedOption = null;
   //highlight selected option
   options.forEach((option) => {
@@ -151,7 +229,7 @@ function displayQuestions(questions, questionIndex, selectedTopic) {
       this.textContent = "Next Question";
 
       if (selectedOption.getAttribute("value") === correctAnswer) {
-        //correct case-highlight option with green
+        //correct case-highlight option with green and increment score by 1
         selectedOption.style.border = `2px solid ${green}`;
         selectedOption.querySelector(
           "span:first-child"
@@ -228,8 +306,10 @@ function displayQuizEnd(score, selectedTopic) {
 function startOverAgain() {
   document.querySelector(".quiz-over-text").style.display = "none";
   document.querySelector(".quiz-score").style.display = "none";
-  document.querySelector(".section-1").style.display = "block";
-  document.querySelector(".section-2").style.display = "block";
+  document.querySelector(".section-1").style.display = "flex";
+  document.querySelector(".section-1").style.flexDirection = "column";
+  document.querySelector(".section-2").style.display = "flex";
+  document.querySelector(".section-2").style.flexDirection = "column";
   score = 0;
   currentHeading.innerHTML = "";
 }
