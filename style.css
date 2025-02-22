@@ -52,6 +52,11 @@
     --green:#26D782;
     --red:#EE5454;
     --pure-white:#FFFFFF;
+    --orange-bg:#FFF1E9;
+    --green-bg:#E0FDEF;
+    --blue-bg:#EBF0FF;
+    --purple-bg:#F6E7FF;
+
 }
 
 body{
@@ -292,6 +297,10 @@ main{
     width: 100%;
     background-color: var(--pure-white);
     border-radius: 20px;
+}
+
+.option>img[src="./assets/images/icon-html.svg"]{
+ background-color: var(--orange-bg);
 }
 
 .option-active{
