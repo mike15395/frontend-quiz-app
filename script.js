@@ -98,7 +98,7 @@ function fetchQuizData() {
 //display initial quiz data
 function displayQuizData(data) {
   let initialStart = data["quizzes"].map((ele) => {
-    return `<div class="quiz-topics" id=${ele.title}><img src=${ele.icon} width=20 height=20/> ${ele.title}</div>`;
+    return `<div class="quiz-topics" id=${ele.title}><img src=${ele.icon} width=20 height=20 alt="icon-title"/> ${ele.title}</div>`;
   });
   document.querySelector(".section-2").innerHTML += initialStart.join("");
 
