@@ -108,7 +108,8 @@ function displayQuizData(data) {
         if (item.title == e.target.id) {
           hideIntialQuizPage();
           currentHeading.innerHTML =
-            `<img src=${item.icon}  id=${item.title}>` + item.title;
+            `<img src=${item.icon}  id=${item.title}> alt="icon-heading"` +
+            item.title;
           displayQuestions(item["questions"], 0, item);
         }
       });
